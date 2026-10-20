@@ -1,0 +1,34 @@
+# This is a Spack Environment file.
+#
+# It describes a set of packages to be installed, along with
+# configuration settings.
+spack:
+  definitions:
+    - compilers: [ifort]
+    - libs:
+      - openblas
+      - fftw
+      - openmpi
+    - build_tools:
+      - python
+      - py-scipy
+      - py-numpy
+      - perl
+      - gmake
+      - cmake
+      - gawk
+
+  # add package specs to the `specs` list
+  specs:
+  - intel-oneapi-compilers-classic@2021.10.0
+  - matrix:
+    - [$libs]
+    - ["$%compilers"]
+  - intel-oneapi-mkl
+  - intel-oneapi-mpi
+  - matrix:
+    - [$build_tools]
+    - ["%gcc_16"]
+  view: true
+  concretizer:
+    unify: true

@@ -1,0 +1,31 @@
+# This is a Spack Environment file.
+#
+# It describes a set of packages to be installed, along with
+# configuration settings.
+spack:
+  definitions:
+    - compilers: [gcc@15]
+    - libs:
+      - openblas
+      - fftw
+      - openmpi
+      - python
+      - py-scipy
+      - py-numpy
+    - build_tools:
+      - perl
+      - gmake
+      - cmake
+      - gawk
+      - valgrind
+      - gdb
+  # add package specs to the `specs` list
+  specs:
+  - $compilers
+  - matrix:
+    - [$libs]
+    - ["$%compilers"]
+  - $build_tools
+  view: true
+  concretizer:
+    unify: true
